@@ -1,5 +1,5 @@
 version: v2beta1
-name: nextjs-app
+name: todo-app-ui
 
 # This is a list of `pipelines` that DevSpace can execute (you can define your own)
 pipelines:
@@ -9,7 +9,7 @@ pipelines:
       run_dependencies --all       # 1. Deploy any projects this project needs (see "dependencies")
       ensure_pull_secrets --all    # 2. Ensure pull secrets
       create_deployments --all     # 3. Deploy Helm charts and manifests specfied as "deployments"
-      start_dev nextjs-app         # 4. Start dev mode "app" (see "dev" section)
+      start_dev todo-app-ui         # 4. Start dev mode "app" (see "dev" section)
   # You can run this pipeline via `devspace deploy` (or `devspace run-pipeline deploy`)
   deploy:
     run: |-
@@ -21,8 +21,8 @@ pipelines:
 # This is a list of `images` that DevSpace can build for this project
 # We recommend to skip image building during development (devspace dev) as much as possible
 images:
-  nextjs-app:
-    image: localhost:5000/nextjs-app
+  todo-app-ui:
+    image: localhost:5000/todo-app-ui
     dockerfile: ./Dockerfile
     rebuildStrategy: always
     skipPush: true
@@ -34,7 +34,7 @@ localRegistry:
 
 # This is a list of `deployments` that DevSpace can create for this project
 deployments:
-  nextjs-app:
+  todo-app-ui:
     # This deployment uses `helm` but you can also define `kubectl` deployments or kustomizations
     helm:
       # We are deploying this project with the Helm chart you provided
@@ -44,15 +44,15 @@ deployments:
       # You may also use `valuesFiles` to load values from files, e.g. valuesFiles: ["values.yaml"]
       values:
         image:
-          tag: ${runtime.images.nextjs-app.tag}
+          tag: ${runtime.images.todo-app-ui.tag}
 
 # This is a list of `dev` containers that are based on the containers created by your deployments
 dev:
-  nextjs-app:
+  todo-app-ui:
     # Search for the container that runs this image
-    imageSelector: localhost:5000/nextjs-app
+    imageSelector: localhost:5000/todo-app-ui
     # Replace the container image with this dev-optimized image (allows to skip image building during development)
-    devImage: node:18-alpine
+    devImage: node:20-alpine
     # Sync files between the local filesystem and the development container
     sync:
       - path: ./
@@ -76,19 +76,4 @@ dev:
       - port: "3000"
     # Open the following URLs once they return an HTTP status code other than 502 or 503
     open:
-      - url: https://nextjs.local
-
-# Use the `commands` section to define repeatable dev workflows for this project 
-commands:
-  migrate-db:
-    command: |-
-      echo 'This is a cross-platform, shared command that can be used to codify any kind of dev task.'
-      echo 'Anyone using this project can invoke it via "devspace run migrate-db"'
-
-# Define dependencies to other projects with a devspace.yaml
-# dependencies:
-#   api:
-#     git: https://...  # Git-based dependencies
-#     tag: v1.0.0
-#   ui:
-#     path: ./ui        # Path-based dependencies (for monorepos)
+      - url: http://nextjs.local

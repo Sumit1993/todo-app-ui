@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "nextjs-app.fullname" . }}
+  name: {{ include "todo-app-ui.fullname" . }}
   labels:
-    app: {{ include "nextjs-app.name" . }}
+    app: {{ include "todo-app-ui.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "nextjs-app.name" . }}
+      app: {{ include "todo-app-ui.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "nextjs-app.name" . }}
+        app: {{ include "todo-app-ui.name" . }}
     spec:
       containers:
-        - name: {{ include "nextjs-app.name" . }}
+        - name: {{ include "todo-app-ui.name" . }}
           image: "{{ .Values.image.domain }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:

@@ -1,14 +1,14 @@
 {{/* 
 Expand the name of the chart.
 */}}
-{{- define "nextjs-app.name" -}}
+{{- define "todo-app-ui.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end }}
 
 {{/*
 Create a default fully qualified app name.
 */}}
-{{- define "nextjs-app.fullname" -}}
+{{- define "todo-app-ui.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}

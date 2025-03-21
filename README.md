@@ -22,7 +22,7 @@ Ensure you have the following installed:
 
 ### Install Dependencies
 ```
-cd nextjs-app
+cd todo-app-ui
 npm install
 ```
 
@@ -33,7 +33,7 @@ npm run dev
 
 ### Deploy to Local Kubernetes (with DevSpace)
 ```
-cd nextjs-app
+cd todo-app-ui
 devspace dev
 ```
 
