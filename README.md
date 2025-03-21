@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js App
+
+This is a Next.js application that consumes the [DummyJSON Todos API](https://dummyjson.com/docs/todos). It is deployed locally using Kubernetes with Rancher Desktop, DevSpace, and Helm.
+
+## Features
+- Built with **Next.js App Router**
+- Uses **@tanstack/react-query** for data fetching
+- Integrated with **Prometheus** for monitoring
+- Runs in a **Kubernetes** cluster managed via **Rancher Desktop**
+- Deployment managed using **DevSpace** and **Helm**
+
+## Prerequisites
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/)
+- [Docker](https://www.docker.com/)
+- [Rancher Desktop](https://rancherdesktop.io/)
+- [Kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Helm](https://helm.sh/)
+- [DevSpace](https://devspace.sh/)
 
 ## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+### Install Dependencies
+```
+cd nextjs-app
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Run Locally
+```
+npm run dev
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Deploy to Local Kubernetes (with DevSpace)
+```
+cd nextjs-app
+devspace dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Access the Application
+Once deployed, the application is accessible via the Nginx Ingress Controller at:
 
-## Learn More
+```
+http://localhost/
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Monitoring
+This application is monitored via Prometheus, which collects performance metrics from the Next.js app.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Development Notes
+- The application runs in **Kubernetes** using **DevSpace**.
+- Ingress is managed via **NGINX**.
+- Observability is handled via **Prometheus**.
