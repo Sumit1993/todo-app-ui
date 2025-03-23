@@ -52,7 +52,7 @@ dev:
     # Search for the container that runs this image
     imageSelector: localhost:5000/todo-app-ui
     # Replace the container image with this dev-optimized image (allows to skip image building during development)
-    devImage: node:20-alpine
+    devImage: ghcr.io/loft-sh/devspace-containers/typescript:20-alpine
     # Sync files between the local filesystem and the development container
     sync:
       - path: ./
@@ -72,8 +72,7 @@ dev:
       - gitCredentials: true
     # Forward the following ports to be able access your application via localhost
     ports:
-      - port: "9229"
       - port: "3000"
     # Open the following URLs once they return an HTTP status code other than 502 or 503
     open:
-      - url: http://nextjs.local
+      - url: http://todo.app.local

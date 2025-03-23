@@ -1,16 +1,23 @@
-import Providers from './providers';
-import { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import { Provider } from "@/components/ui/provider"
+import './globals.css';
 
-export const metadata = {
-  title: 'Next.js Todo App',
-  description: 'A Todo List application using Next.js and NestJS',
+export const metadata: Metadata = {
+  title: 'Todo App',
+  description: 'A simple todo application',
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
-        <Providers>{children}</Providers>
+        <Provider>
+          {children}
+        </Provider>
       </body>
     </html>
   );
