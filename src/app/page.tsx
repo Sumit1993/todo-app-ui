@@ -13,9 +13,9 @@ export default function Home() {
   return (
     <Container maxW="container.md" py={8}>
       <Box mb={8} textAlign="center">
-        <Heading as="h1" size="xl" mb={2}>Todo App ({isLocal ? 'Local Version' : 'Cloud Version'})</Heading>
+        <Heading as="h1" size="xl" mb={2}>Todo App {isLocal ? '(Local Version)' : '(Cloud Version)'}</Heading>
         <Text color="gray.600">
-          A simple todo application using Next.js and NestJS - {isLocal ? 'running locally' : 'deployed on free cloud services'}
+          A simple todo application using Next.js and NestJS {isLocal ? '- running locally' : '- deployed on free cloud services'}
         </Text>
         
         {!isLocal && (
@@ -46,10 +46,10 @@ export default function Home() {
 
       <Box mt={8} pt={6} borderTop="1px" borderColor="gray.200" fontSize="sm" color="gray.500" textAlign="center">
         <Text>
-          Todo App - {isLocal ? 'Running locally' : 'Running on Vercel (Frontend) and Render (Backend) with Grafana Cloud & LogDNA'}
+          Todo App - {isLocal ? 'Running locally with Prometheus monitoring' : 'Running on Vercel (Frontend) and Render (Backend) with Prometheus metrics scraping and Grafana Loki logs'}
         </Text>
         <Text mt={2}>
-          <Link href="https://github.com/yourusername/todo-app" color="blue.500">
+          <Link href="https://github.com/Sumit1993/todo-app-ui" color="blue.500">
             View Source on GitHub <LuExternalLink style={{ display: 'inline' }} />
           </Link>
         </Text>
