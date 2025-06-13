@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, Text, Button, Flex, Spinner } from '@chakra-ui/react';
 import { Alert, Checkbox } from '@chakra-ui/react';
 import { LuPlus } from 'react-icons/lu';
+import { useTheme } from 'next-themes';
 import TodoForm from './TodoForm';
 
 interface Todo {
@@ -18,6 +19,7 @@ const TodoList: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
   const [isSpinningUp, setIsSpinningUp] = useState<boolean>(false);
+  const { theme } = useTheme();
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://todo.app.local/api';
 
@@ -116,6 +118,10 @@ const TodoList: React.FC = () => {
     }
   };
 
+  const textColor = theme === 'light' ? 'gray.800' : 'whiteAlpha.900';
+  const completedTextColor = theme === 'light' ? 'gray.500' : 'gray.400';
+  const borderColor = theme === 'light' ? 'gray.200' : 'gray.600';
+
   if (isLoading && !isSpinningUp) {
     return (
       <Flex justify="center" align="center" height="200px">
@@ -160,7 +166,7 @@ const TodoList: React.FC = () => {
   return (
     <Box>
       {todos.length === 0 ? (
-        <Text fontSize="lg" mb={4}>
+        <Text fontSize="lg" mb={4} color={textColor}>
           No todos yet! Add one below.
         </Text>
       ) : (
@@ -172,6 +178,7 @@ const TodoList: React.FC = () => {
               mb={2}
               alignItems="center"
               borderWidth="1px"
+              borderColor={borderColor}
               borderRadius="md"
             >
               <Checkbox.Root 
@@ -187,13 +194,13 @@ const TodoList: React.FC = () => {
               <Text
                 flex="1"
                 textDecoration={todo.completed ? 'line-through' : 'none'}
-                color={todo.completed ? 'gray.500' : 'black'}
+                color={todo.completed ? completedTextColor : textColor}
               >
                 {todo.todo}
               </Text>
               <Button
                 size="sm"
-                colorPalette="red"
+                colorScheme="red"
                 onClick={() => deleteTodo(todo.id)}
               >
                 Delete
@@ -210,7 +217,7 @@ const TodoList: React.FC = () => {
         />
       ) : (
         <Button
-          colorPalette="blue"
+          colorScheme="blue"
           onClick={() => setIsFormOpen(true)}
         >
           <LuPlus style={{ marginRight: '8px' }} /> Add Todo
