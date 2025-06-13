@@ -357,13 +357,16 @@ const IssueSimulator: React.FC = () => {
       <Stack direction="column" gap={3} align="stretch" mb={4}>
         <Stack direction="row" align="center" justify="space-between">
           <Text>Click any button to simulate different issues:</Text>
-          <Checkbox
+          <Checkbox.Root
             checked={burstMode}
-            onChange={(e) => setBurstMode(e.target.checked)}
+            onCheckedChange={(e) => setBurstMode(!!e.checked)}
             colorPalette="blue"
           >
-            Burst Mode (20 rapid calls)
-          </Checkbox>
+            
+            <Checkbox.HiddenInput />
+            <Checkbox.Control />
+            <Checkbox.Label>Burst Mode (20 rapid calls)</Checkbox.Label>
+          </Checkbox.Root>
         </Stack>
         
         <SimpleGrid columns={{ base: 1, md: 2 }} gap="5">
